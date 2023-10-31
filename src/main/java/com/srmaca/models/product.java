@@ -42,38 +42,38 @@ public class product {
 
     //Getters AND Setters
     //ID_PRODUCT
-    public Long getId(){
+    public Long getIdProduct(){
         return idProduct;
     }
-    public void setId(Long id){
+    public void setIdProduct(Long id){
         this.idProduct = id;
     }
     //NAME
-    public String getName(){
+    public String getNameProduct(){
         return name;
     }
-    public void setName(String name){
+    public void setNameProduct(String name){
         this.name = name;
     }
     //DESCRIPTION
-    public String getDescription(){
+    public String getDescriptionProduct(){
         return description;
     }
-    public void setDescription(String description){
+    public void setDescriptionProduct(String description){
         this.name = description;
     }
     //IMAGE
-    public String getImage(){
+    public String getImageProduct(){
         return image;
     }
-    public void setImage(String image){
+    public void setImageProduct(String image){
         this.image = image;
     }
-    //NAME
+    //CATEGORY_ID ONLY GET
     public Long getCategoryId(){
         return categoryId;
     }
-    public void setName(Long category_id){
-        this.categoryId = category_id;
+    public void setCategoryId(Long categoryId){
+        this.categoryId = categoryId;
     }
 }
