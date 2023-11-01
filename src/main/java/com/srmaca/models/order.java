@@ -72,4 +72,39 @@ public class order {
     public void setOrderStatus(String orderStatus){
         this.orderStatus = orderStatus;
     }
+    //TOTAL_AMOUNT
+    public double getTotalAmount(){
+        return total_amount;
+    }
+    public void setTotalAmount(double total_amount){
+        this.total_amount = total_amount;
+    }
+    //SHIPPING_ADDRESSES
+    public String getShippingAddress(){
+        return shipping_address;
+    }
+    public void setShippingAddress(String shipping_address){
+        this.shipping_address = shipping_address;
+    }
+    //PAYMENT_METHOD
+    public String getPaymentMethod(){
+        return payment_method;
+    }
+    public void setPaymentMethod(String payment_method){
+        this.payment_method = payment_method;
+    }
+    //CREATED_AT
+    public Date getCreatedAt(){
+        return created_at;
+    }
+    public void setCreatedAt(Date created_at){
+        this.created_at = created_at;
+    }
+    //UPDATED_AT
+    public Date getUpdatedAt(){
+        return updated_at;
+    }
+    public void setUpdatedAt(Date updated_at){
+        this.updated_at = updated_at;
+    }
 }
