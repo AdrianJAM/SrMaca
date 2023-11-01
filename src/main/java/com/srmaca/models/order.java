@@ -62,7 +62,7 @@ public class order {
     public Date getOrderDate(){
         return orderDate;
     }
-    public void setOrdeDate(){
+    public void setOrdeDate(Date orderDate){
         this.orderDate = orderDate;
     }
     //ORDER_STATUS
