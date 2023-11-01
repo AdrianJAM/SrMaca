@@ -58,5 +58,18 @@ public class order {
     public void setIdUser(Long user_id){
         this.user_id = user_id;
     }
-    
+    //Order_Date
+    public Date getOrderDate(){
+        return orderDate;
+    }
+    public void setOrdeDate(){
+        this.orderDate = orderDate;
+    }
+    //ORDER_STATUS
+    public String getOrderStatus(){
+        return orderStatus;
+    }
+    public void setOrderStatus(String orderStatus){
+        this.orderStatus = orderStatus;
+    }
 }
