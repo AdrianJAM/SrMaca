@@ -1,8 +1,6 @@
 package com.srmaca.models;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-
 import jakarta.persistence.*;
 
 @Entity
