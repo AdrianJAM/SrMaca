@@ -1,15 +1,10 @@
 package com.srmaca.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.util.Date;
-import jakarta.persistence.Column;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "")
+@Table(name = "orders")
 public class order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +15,7 @@ public class order {
     private Long user_id;
 
     @Column(name = "order_date")   
-    private Date orderDate;
+    private Timestamp orderDate;
 
     @Column(name = "status")
     private String orderStatus;
@@ -35,10 +30,10 @@ public class order {
     private String payment_method;
 
     @Column(name = "created_at")
-    private Date created_at;
+    private Timestamp created_at;
 
     @Column(name = "updated_at")
-    private Date updated_at;
+    private Timestamp updated_at;
 
     public order(){
     }
@@ -59,10 +54,10 @@ public class order {
         this.user_id = user_id;
     }
     //Order_Date
-    public Date getOrderDate(){
+    public Timestamp getOrderDate(){
         return orderDate;
     }
-    public void setOrdeDate(Date orderDate){
+    public void setOrdeDate(Timestamp orderDate){
         this.orderDate = orderDate;
     }
     //ORDER_STATUS
@@ -94,17 +89,17 @@ public class order {
         this.payment_method = payment_method;
     }
     //CREATED_AT
-    public Date getCreatedAt(){
+    public Timestamp getCreatedAt(){
         return created_at;
     }
-    public void setCreatedAt(Date created_at){
+    public void setCreatedAt(Timestamp created_at){
         this.created_at = created_at;
     }
     //UPDATED_AT
-    public Date getUpdatedAt(){
+    public Timestamp getUpdatedAt(){
         return updated_at;
     }
-    public void setUpdatedAt(Date updated_at){
+    public void setUpdatedAt(Timestamp updated_at){
         this.updated_at = updated_at;
     }
 }
