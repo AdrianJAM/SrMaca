@@ -8,6 +8,10 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "inventory")
 public class inventory {
+
+    @Id
+    private Long id;
+
     @Column(name = "product_id")
     private Long product_id;
 

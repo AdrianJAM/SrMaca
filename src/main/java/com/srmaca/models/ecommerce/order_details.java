@@ -12,12 +12,10 @@ public class order_details {
     @Column(name = "id_orderdetails")
     private Long id_order_details;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id", referencedColumnName = "id_order")
+    @Column(name = "order_id")
     private Long order_id;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id_product")
+    @Column(name = "product_id")
     private Long product_id;
 
     @Column(name = "quantity", nullable = false)
