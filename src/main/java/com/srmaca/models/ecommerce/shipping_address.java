@@ -1,4 +1,4 @@
-package com.srmaca.models;
+package com.srmaca.models.ecommerce;
 
 import java.sql.Timestamp;
 import jakarta.persistence.*;

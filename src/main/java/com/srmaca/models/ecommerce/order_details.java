@@ -1,70 +1,71 @@
-package com.srmaca.models;
+package com.srmaca.models.ecommerce;
 
 import jakarta.persistence.*;
-import java.sql.Timestamp;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Entity
-@Table(name = "shopping_cart")
-public class cart {
+@Table(name = "order_details")
+public class order_details {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cart")
-    private Long id_cart;
+    @Column(name = "id_orderdetails")
+    private Long id_order_details;
 
-    @Column(name = "user_id")
-    private Long user_id;
+    @ManyToOne
+    @JoinColumn(name = "order_id", referencedColumnName = "id_order")
+    private Long order_id;
 
-    @Column(name = "product_id")
+    @ManyToOne
+    @JoinColumn(name = "product_id", referencedColumnName = "id_product")
     private Long product_id;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @Column(name = "unit_price", precision = 10, scale = 2, nullable = false)
+    private BigDecimal unit_price;
+
     @Column(name = "subtotal", precision = 10, scale = 2, nullable = false)
     private BigDecimal subtotal;
 
-    @Column(name = "status", length = 50, nullable = false)
-    private String status;
-
-    @Column(name = "created_at", columnDefinition = "timestamp default current_timestamp")
+    @Column(name = "created_at", updatable = false)
     private Timestamp created_at;
 
-    @Column(name = "updated_at", columnDefinition = "timestamp default current_timestamp")
+    @Column(name = "updated_at")
     private Timestamp updated_at;
 
     //CONSTRUCTOR
-    public cart(){
-    }
-    public cart(Long user_id, Long product_id, Integer quantity, BigDecimal subtotal, String status) {
-        this.user_id = user_id;
+    public order_details(){}
+    public order_details(Long order_id, Long product_id, Integer quantity, BigDecimal unit_price, BigDecimal subtotal) {
+        this.order_id = order_id;
         this.product_id = product_id;
         this.quantity = quantity;
+        this.unit_price = unit_price;
         this.subtotal = subtotal;
-        this.status = status;
         this.created_at = new Timestamp(System.currentTimeMillis());
         this.updated_at = new Timestamp(System.currentTimeMillis());
     }
     //GETTERS AND SETTERS
-    //ID_CART
-    public Long getIdCart(){
-        return id_cart;
+    //ID_ORDER_DETAILS
+    public Long getIdOrderDetails() {
+        return id_order_details;
     }
-    public void setIdCart(Long id_cart){
-        this.id_cart = id_cart;
+    public void setIdOrderDetails(Long id_order_details) {
+        this.id_order_details = id_order_details;
     }
-    //USER_ID
-    public Long getUserId() {
-        return user_id;
+    //ORDER_ID
+    public Long getOrderId() {
+        return order_id;
     }
-    public void setUserId(Long user_id) {
-        this.user_id = user_id;
+    public void setOrderId(Long order_id) {
+        this.order_id = order_id;
     }
     //PRODUCT_ID
     public Long getProductId() {
         return product_id;
     }
-    public void setProductId(Long product_id) {
+    public void setProduct(Long product_id) {
         this.product_id = product_id;
     }
     //QUANTITY
@@ -74,19 +75,19 @@ public class cart {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+    //UNIT_PRICE
+    public BigDecimal getUnitPrice() {
+        return unit_price;
+    }
+    public void setUnitPrice(BigDecimal unit_price) {
+        this.unit_price = unit_price;
+    }
     //SUBTOTAL
     public BigDecimal getSubtotal() {
         return subtotal;
     }
     public void setSubtotal(BigDecimal subtotal) {
         this.subtotal = subtotal;
-    }
-    //STATUS
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
     }
     //CREATED_AT
     public Timestamp getCreatedAt() {
