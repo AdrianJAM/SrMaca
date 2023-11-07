@@ -10,7 +10,6 @@ import jakarta.persistence.GenerationType;
 @Entity
 @Table(name = "products")
 public class product {
-    // Columnas de Tabla Productos
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
@@ -27,6 +26,9 @@ public class product {
 
     @Column(name = "category_id")
     private Long categoryId;
+
+    @Column(name = "user_id")
+    private Long user_id;
 
     // Constructor Clase Product
 
