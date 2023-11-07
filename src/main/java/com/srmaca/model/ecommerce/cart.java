@@ -2,6 +2,7 @@ package com.srmaca.model.ecommerce;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 import java.math.BigDecimal;
 
 @Entity
@@ -17,6 +18,9 @@ public class cart {
 
     @Column(name = "product_id")
     private Long product_id;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<cartItem> cartItems;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
@@ -66,6 +70,13 @@ public class cart {
     }
     public void setProductId(Long product_id) {
         this.product_id = product_id;
+    }
+    //CART_ITEMS
+    public List<cartItem> getCartItems(){
+        return cartItems;
+    }
+    public void setCartItems(List<cartItem> cartItems){
+        this.cartItems = cartItems;
     }
     //QUANTITY
     public Integer getQuantity() {

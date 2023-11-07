@@ -4,6 +4,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GenerationType;
 
@@ -20,6 +23,9 @@ public class product {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "price")
+    private BigDecimal price;
 
     @Column(name = "image")
     private String image;
@@ -63,6 +69,13 @@ public class product {
     }
     public void setDescriptionProduct(String description){
         this.name = description;
+    }
+    //PRICE
+    public BigDecimal getPriceProduct(){
+        return price;
+    }
+    public void setPriceProduct(BigDecimal price){
+        this.price = price;
     }
     //IMAGE
     public String getImageProduct(){
