@@ -12,5 +12,5 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
     //Metodo Para Verificar si un producto existe en la bd
     Boolean existsByName(String name);
     //Metodo Para Buscar Producto mediante Id
-    Optional<Product> findById(Long id);
+    Optional<Product> findByidProduct(Long idProduct);
 }

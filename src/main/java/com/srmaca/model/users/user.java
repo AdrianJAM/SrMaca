@@ -11,14 +11,14 @@ import lombok.*;
 
 @Entity
 @Table(name = "users")
-public class user{
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_user")
-    private Long id_user;
+    private Long idUser;
 
     @Column(name = "username")
-    private String name;
+    private String username;
 
     @Column(name = "email")
     private String email;

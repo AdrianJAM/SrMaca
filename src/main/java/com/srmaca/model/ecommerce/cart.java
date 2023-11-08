@@ -11,7 +11,7 @@ public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cart")
-    private Long id_cart;
+    private Long idCart;
 
     @Column(name = "user_id")
     private Long user_id;
@@ -52,10 +52,10 @@ public class Cart {
     //GETTERS AND SETTERS
     //ID_CART
     public Long getIdCart(){
-        return id_cart;
+        return idCart;
     }
     public void setIdCart(Long id_cart){
-        this.id_cart = id_cart;
+        this.idCart = id_cart;
     }
     //USER_ID
     public Long getUserId() {

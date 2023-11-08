@@ -12,11 +12,10 @@ import com.srmaca.model.ecommerce.Product;
 
 @Service
 public class CartServiceImpl implements CartService{
-
+    
+    /* @Autowired
+    private CartRepository cartRepository; */
     /*  @Autowired
-    private cartRepository cartRepository;
-
-    @Autowired
     private productRepository productRepository; */
 
     @Override
@@ -56,10 +55,9 @@ public class CartServiceImpl implements CartService{
                 cart.setCartItems(cartItems);
 
                 //Calcular nuevo subtotal
-                //BigDecimal newSubtotal = calculateTotal(cart);
-                //cart.setSubtotal(newSubtotal);
-                // Guarda los cambios en el carrito, por ejemplo, si estás usando un servicio o repositorio para almacenarlos
-                // cartService.saveCart(cart);
+                BigDecimal newSubtotal = calculateTotal(cart);
+                cart.setSubtotal(newSubtotal);
+                //Guarda los cambios en el carrito, por ejemplo, si estás usando un servicio o repositorio para almacenarlos
                 break;
             }
         }
@@ -67,12 +65,25 @@ public class CartServiceImpl implements CartService{
     
     @Override
     public void clearCart(Cart cart) {
-        
+        // Obtiene la lista del carrito
+        List<CartItem> cartItems = cart.getCartItems();
+        // Itera a traves de la lista y elimina cada producto del carrito
+        for(CartItem cartItem : cartItems){
+            removeFromCart(cart, cartItem.getProduct());
+        }
     }
     
-    /* @Override
-    public BigDecimal calculateTotal(cart cart) {
-        // Implementa la lógica para calcular el total del carrito
-        return 0.0; // Debes retornar el valor correcto
-    } */
+    @Override
+    public BigDecimal calculateTotal(Cart cart) {
+        List<CartItem> cartItems = cart.getCartItems();
+        BigDecimal total = BigDecimal.ZERO;
+
+        for (CartItem cartItem : cartItems){
+            BigDecimal productPrice = cartItem.getProduct().getPriceProduct();
+            int quantity = cartItem.getQuantity();
+            BigDecimal subtotal = productPrice.multiply(BigDecimal.valueOf(quantity));
+            total = total.add(subtotal);
+        }
+        return total;
+    }
 }
