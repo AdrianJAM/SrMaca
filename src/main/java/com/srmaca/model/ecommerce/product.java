@@ -4,9 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
 import java.math.BigDecimal;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.GenerationType;
 
@@ -32,9 +30,6 @@ public class Product {
 
     @Column(name = "category_id")
     private Long categoryId;
-
-    @Column(name = "user_id")
-    private Long user_id;
 
     // Constructor Clase Product
 

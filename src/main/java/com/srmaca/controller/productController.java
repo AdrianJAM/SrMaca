@@ -10,15 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/api/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping
+    /*@GetMapping
     public ResponseEntity<List<Product>> getAllProducts(){
         List<Product> products = productService.getAllProducts();
         return ResponseEntity.ok(products);
+    } */
+
+    @GetMapping(value = "getAllProducts", headers = "Accept=application/json")
+    public List<Product> getAllProducts(){
+        return productService.getAllProducts();
     }
 
     @GetMapping("/{idProduct}")

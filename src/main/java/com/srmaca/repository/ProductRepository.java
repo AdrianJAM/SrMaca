@@ -1,5 +1,6 @@
 package com.srmaca.repository;
 
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -13,4 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>{
     Boolean existsByName(String name);
     //Metodo Para Buscar Producto mediante Id
     Optional<Product> findByidProduct(Long idProduct);
+    //Metodo para obtener todos los productos
+    List<Product> findAll();
 }
