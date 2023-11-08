@@ -2,16 +2,16 @@ package com.srmaca.service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.srmaca.model.ecommerce.cart;
-import com.srmaca.model.ecommerce.cartItem;
-import com.srmaca.model.ecommerce.product;
-import com.srmaca.repository.cartRepository;
-import com.srmaca.repository.productRepository;
+import com.srmaca.model.ecommerce.Cart;
+import com.srmaca.model.ecommerce.CartItem;
+import com.srmaca.model.ecommerce.Product;
+// import com.srmaca.repository.CartRepository;
+// import com.srmaca.repository.productRepository;
 
 @Service
-public class cartServiceImpl implements cartService{
+public class CartServiceImpl implements CartService{
 
     /*  @Autowired
     private cartRepository cartRepository;
@@ -20,10 +20,10 @@ public class cartServiceImpl implements cartService{
     private productRepository productRepository; */
 
     @Override
-    public void addToCart(cart cart, product product, int quantity){
+    public void addToCart(Cart cart, Product product, int quantity){
         //Verificar si el producto ya esta en el carrito
-        List<cartItem> cartItems = cart.getCartItems();
-        for (cartItem cartItem : cartItems){
+        List<CartItem> cartItems = cart.getCartItems();
+        for (CartItem cartItem : cartItems){
             if(cartItem.getProduct().equals(product)){
                 //El producto ya esta en el carrito, actualiza la cantidad y el total
                 int newQuantity = cartItem.getQuantity() + quantity;
@@ -34,7 +34,7 @@ public class cartServiceImpl implements cartService{
             }
         }
         //El producto no esta en el carrito, crea uno nuevo item
-        cartItem newCartItem = new cartItem();
+        CartItem newCartItem = new CartItem();
         newCartItem.setProduct(product);
         newCartItem.setQuantity(quantity);
         BigDecimal subtotal = product.getPriceProduct().multiply(BigDecimal.valueOf(quantity));
@@ -44,11 +44,11 @@ public class cartServiceImpl implements cartService{
     }
 
     @Override
-    public void removeFromCart(cart cart, product product) {
+    public void removeFromCart(Cart cart, Product product) {
         //Primero obtener la lista de items del carrito
-        List<cartItem> cartItems = cart.getCartItems();
+        List<CartItem> cartItems = cart.getCartItems();
         //Luego itera sobre la lista de items del carrito para buscar el item a borrar
-        for(cartItem cartItem : cartItems){
+        for(CartItem cartItem : cartItems){
             //Si el item coincide, se borra
             if(cartItem.getProduct().equals(product)){
                 cartItems.remove(cartItem);
@@ -66,7 +66,7 @@ public class cartServiceImpl implements cartService{
     }
     
     @Override
-    public void clearCart(cart cart) {
+    public void clearCart(Cart cart) {
         
     }
     

@@ -10,14 +10,14 @@ import lombok.*;
 @AllArgsConstructor
 
 @Entity
-public class cartItem {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_cartItem;
 
     @ManyToOne
     @JoinColumn(name = "id_product")
-    private product product;
+    private Product product;
 
     @Column(name = "quantity")
     private int quantity;

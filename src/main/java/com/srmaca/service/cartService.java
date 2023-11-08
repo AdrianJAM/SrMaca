@@ -1,18 +1,16 @@
 package com.srmaca.service;
 
-import java.math.BigDecimal;
+//import java.math.BigDecimal;
+import com.srmaca.model.ecommerce.Cart;
+import com.srmaca.model.ecommerce.Product;
 
-import com.srmaca.model.ecommerce.cart;
-import com.srmaca.model.ecommerce.product;
-
-
-public interface cartService {
+public interface CartService {
     //Metodo para agregar al carrito
-    void addToCart(cart cart, product product, int quantity);
+    void addToCart(Cart cart, Product product, int quantity);
     //Metodo para remover del carrito
-    void removeFromCart(cart cart, product product);
+    void removeFromCart(Cart cart, Product product);
     //Metodo para borrar carrito
-    void clearCart(cart cart);
+    void clearCart(Cart cart);
     //Metodo para calcular total del carrito - checkout
     //BigDecimal calculateTotal(cart cart);
 }

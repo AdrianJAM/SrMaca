@@ -1,5 +1,5 @@
 package com.srmaca.service;
 
-public class userServiceImpl {
+public class UserServiceImpl {
     
 }

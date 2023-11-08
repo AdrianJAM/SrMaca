@@ -12,7 +12,7 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 @Table(name = "products")
-public class product {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product")
@@ -38,10 +38,10 @@ public class product {
 
     // Constructor Clase Product
 
-    public product(){
+    public Product(){
     }
 
-    public product(String name, String description, String image, Long categoryId){
+    public Product(String name, String description, String image, Long categoryId){
         this.name = name;
         this.description = description;
         this.image = image;

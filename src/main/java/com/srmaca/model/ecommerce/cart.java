@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "shopping_cart")
-public class cart {
+public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cart")
@@ -20,7 +20,7 @@ public class cart {
     private Long product_id;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<cartItem> cartItems;
+    private List<CartItem> cartItems;
 
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
@@ -38,9 +38,9 @@ public class cart {
     private Timestamp updated_at;
 
     //CONSTRUCTOR
-    public cart(){
+    public Cart(){
     }
-    public cart(Long user_id, Long product_id, Integer quantity, BigDecimal subtotal, String status) {
+    public Cart(Long user_id, Long product_id, Integer quantity, BigDecimal subtotal, String status) {
         this.user_id = user_id;
         this.product_id = product_id;
         this.quantity = quantity;
@@ -72,10 +72,10 @@ public class cart {
         this.product_id = product_id;
     }
     //CART_ITEMS
-    public List<cartItem> getCartItems(){
+    public List<CartItem> getCartItems(){
         return cartItems;
     }
-    public void setCartItems(List<cartItem> cartItems){
+    public void setCartItems(List<CartItem> cartItems){
         this.cartItems = cartItems;
     }
     //QUANTITY

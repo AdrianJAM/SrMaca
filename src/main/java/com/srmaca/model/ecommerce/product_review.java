@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "products_reviews")
-public class product_review {
+public class Product_review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_review")
@@ -33,8 +33,8 @@ public class product_review {
     private Timestamp updated_at;
 
     //CONSTRUCTOR
-    public product_review(){}
-    public product_review(Long id_review, Long user_id, Long product_id, short rating, String review_text, Timestamp review_date, Timestamp created_at, Timestamp updated_at){
+    public Product_review(){}
+    public Product_review(Long id_review, Long user_id, Long product_id, short rating, String review_text, Timestamp review_date, Timestamp created_at, Timestamp updated_at){
         this.id_review = id_review;
         this.user_id = user_id;
         this.product_id = product_id;

@@ -2,13 +2,12 @@ package com.srmaca.repository;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import com.srmaca.model.users.user;
 
 @Repository
-public interface userRepository extends JpaRepository<user, Long>{
+public interface UserRepository extends JpaRepository<user, Long>{
     //Metodo para buscar por nombre
     Optional<user> findByUsername(String username);
     //Metodo para buscar por ID

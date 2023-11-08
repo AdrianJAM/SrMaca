@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "orders")
-public class order {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_order")
@@ -35,7 +35,7 @@ public class order {
     @Column(name = "updated_at")
     private Timestamp updated_at;
 
-    public order(){
+    public Order(){
     }
 
     //Getters AND Setters

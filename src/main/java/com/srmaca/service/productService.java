@@ -1,13 +1,13 @@
 package com.srmaca.service;
 
-import com.srmaca.model.ecommerce.product;
+import com.srmaca.model.ecommerce.Product;
 import java.util.List;
 
-public interface productService {
+public interface ProductService {
     //Metodo para obtener todos los productos
-    List<product> getAllProducts();
+    List<Product> getAllProducts();
     //Metodo para buscar producto por su ID
-    product getIdProduct(Long id);
+    Product getIdProduct(Long id);
     //Metodo para borrar producto
     void deleteProductById(Long id);
 }
