@@ -1,10 +1,16 @@
 package com.srmaca.model.ecommerce;
 
 import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
-@Table(name = "categories_products")
-public class categories_products{
+@Table(name = "categories_products", schema="ecommerce")
+public class Categories_products{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_category")
@@ -15,33 +21,4 @@ public class categories_products{
 
     @Column(name = "description")
     private String description;
-
-    //CONSTRUCTOR
-    public categories_products(){}
-    public categories_products(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-    //GETTER AND SETTERS
-    //ID_CATEGORY
-    public Long getIdCategory() {
-        return id_category;
-    }
-    public void setIdCategory(Long id_category) {
-        this.id_category = id_category;
-    }
-    //NAME
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    //DESCRIPTION
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
