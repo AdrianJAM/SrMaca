@@ -1,11 +1,11 @@
 package com.srmaca.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.srmaca.model.ecommerce.Product;
 import com.srmaca.service.ProductService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -14,31 +14,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class ProductController {
     @Autowired
     private ProductService productService;
-
-    /*@GetMapping
-    public ResponseEntity<List<Product>> getAllProducts(){
-        List<Product> products = productService.getAllProducts();
-        return ResponseEntity.ok(products);
-    } */
-
-    @GetMapping(value = "getAllProducts", headers = "Accept=application/json")
-    public List<Product> getAllProducts(){
-        return productService.getAllProducts();
+    
+    public ProductController(ProductService productService){
+        this.productService = productService;
     }
 
-    @GetMapping("/{idProduct}")
-    public ResponseEntity<Product> getProductById(@PathVariable Long idProduct) {
-        Product product = productService.getIdProduct(idProduct);
-        if (product != null) {
-            return ResponseEntity.ok(product);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping(value = "create", headers = "Accept=application/json")
+    public void createProduct(@RequestBody Product product){
+        productService.createProduct(product);
     }
-    //POST para crear product
-    /* @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product createdProduct = productService.createProduct(product);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
-    } */
+
+    @GetMapping(value = "getProducts", headers = "Accept=application/json")
+    public List<Product> getProducts(){
+        return productService.getProducts();
+    }
+
+    @GetMapping(value = "getProductById/{id}", headers = "Accept=application/json")
+    public Optional<Product> getProductById(@PathVariable Long id){
+        return productService.getProductById(id);
+    }
+
+    @GetMapping(value = "getProductByName/{name}", headers = "Accept=application/json")
+    public List<Product> getProductByName(@PathVariable String name){
+        return productService.getProductByName(name);
+    }
 }

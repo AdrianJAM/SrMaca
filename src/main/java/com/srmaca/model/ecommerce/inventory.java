@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "inventory")
-public class inventory {
+public class Inventory {
 
     @Id
     private Long id;
