@@ -1,7 +1,9 @@
 package com.srmaca.service;
 
 import java.math.BigDecimal;
+import java.util.List;
 import com.srmaca.model.ecommerce.Cart;
+import com.srmaca.model.ecommerce.CartItem;
 import com.srmaca.model.ecommerce.Product;
 
 public interface CartService {
@@ -15,4 +17,6 @@ public interface CartService {
     BigDecimal calculateTotal(Cart cart);
     //Metodo para guardar/actualizar carrito
     //void saveCart(Cart cart);
+    //Metodo par obtener items del carrito
+    List<CartItem> getCartItems(Cart cart);
 }

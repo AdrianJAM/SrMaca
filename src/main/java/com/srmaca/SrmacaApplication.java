@@ -11,5 +11,4 @@ public class SrmacaApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SrmacaApplication.class, args);
 	}
-
 }
