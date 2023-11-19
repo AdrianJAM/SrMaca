@@ -22,13 +22,21 @@ public class JwtAuthentacionFilter extends OncePerRequestFilter{
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
 
-    private String getTokenByRequest(HttpServletRequest request){
+    /* private String getTokenByRequest(HttpServletRequest request){
         String bearerToken = request.getHeader("Authorization");
         if (StringUtils.isEmpty(bearerToken)&&bearerToken.startsWith("Bearer ")){
             return bearerToken.substring(7, bearerToken.length());
         }
         return null;
-    }
+    } */
+    
+    private String getTokenByRequest(HttpServletRequest request){
+        String bearerToken = request.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")){
+            return bearerToken.substring(7);
+        }
+        return null;
+    } 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
