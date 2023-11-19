@@ -11,7 +11,7 @@ import lombok.*;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "purchase_history")
+@Table(name = "purchase_history", schema = "ecommerce")
 public class Purchase_history {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

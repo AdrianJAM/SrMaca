@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "inventory")
+@Table(name = "inventory", schema = "ecommerce")
 public class Inventory {
 
     @Id

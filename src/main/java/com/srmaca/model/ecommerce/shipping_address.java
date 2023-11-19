@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "shipping_addresses")
+@Table(name = "shipping_addresses", schema = "ecommerce")
 public class Shipping_address {
     @Id
     @Column(name = "id_address")
