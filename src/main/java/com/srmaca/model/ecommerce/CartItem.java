@@ -10,6 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 
 @Entity
+@Table(name = "cart_item", schema = "ecommerce")
 public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
