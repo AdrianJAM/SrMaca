@@ -3,8 +3,7 @@ package com.srmaca.model.ecommerce;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 

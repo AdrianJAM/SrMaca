@@ -1,11 +1,13 @@
 package com.srmaca.model.ecommerce;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 import lombok.*;
+import com.srmaca.model.users.Users;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 
@@ -17,8 +19,12 @@ public class Order {
     @Column(name = "id_order")
     private Long id_order;
 
-    @Column(name = "user_id")
-    private Long user_id;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id_user")
+    private Users user;
+
+    @ManyToMany
+    private List<Product> products;
 
     @Column(name = "order_date")   
     private Timestamp orderDate;
@@ -27,7 +33,7 @@ public class Order {
     private String orderStatus;
 
     @Column(name = "total_amount")
-    private double total_amount;
+    private BigDecimal total_amount;
 
     @Column(name = "shipping_address")
     private String shipping_address;

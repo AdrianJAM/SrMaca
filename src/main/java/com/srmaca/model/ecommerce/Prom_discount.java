@@ -5,8 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 

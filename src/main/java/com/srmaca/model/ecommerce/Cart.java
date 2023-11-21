@@ -6,8 +6,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.math.BigDecimal;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 

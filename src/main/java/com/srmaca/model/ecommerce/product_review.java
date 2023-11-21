@@ -4,8 +4,7 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 
