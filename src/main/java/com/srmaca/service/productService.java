@@ -21,7 +21,8 @@ public class ProductService {
     }
     //Metodo para obtener lista de productos
     public List<Product> getProducts(){
-        return productRepository.findAll();
+        List<Product> products = productRepository.findAll();
+        return products;
     }
     //Metodo para obtener producto por ID
     public Optional<Product> getProductById(Long id){
