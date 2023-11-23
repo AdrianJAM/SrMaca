@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Data
 @NoArgsConstructor
@@ -38,8 +39,20 @@ public class Product {
     @Column(name = "category_id")
     private Long categoryId;
 
+    @Column(name = "pilsData", columnDefinition = "jsonb")
+    @JsonIgnore
+    private String pilsData;
+
     @Transient
     public List<String> getBenefitsList() {
         return Arrays.asList(benefits.split(","));
+    }
+
+    public PillsData getPillsData() throws JsonProcessingException{
+        return PillsData.fromJson(this.pilsData);
+    }
+
+    public void setPillsData(PillsData pillsData) throws JsonProcessingException{
+        this.pilsData = pillsData.toJson();
     }
 }
