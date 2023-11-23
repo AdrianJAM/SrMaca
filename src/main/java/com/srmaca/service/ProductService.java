@@ -1,5 +1,6 @@
 package com.srmaca.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.srmaca.model.ecommerce.Product;
 import com.srmaca.repository.ProductRepository;
 import java.util.List;
@@ -35,5 +36,9 @@ public class ProductService {
     //Metodo para actualizar datos de producto
     public void updateProduct(Product product){
         productRepository.save(product);
+    }
+
+    public Product saveProduct(Product product) throws JsonProcessingException{
+        return productRepository.save(product);
     }
 }
