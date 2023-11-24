@@ -1,9 +1,13 @@
 package com.srmaca.model.ecommerce;
 
 import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.srmaca.model.ecommerce.data.AddTextData;
+import com.srmaca.model.ecommerce.data.Benefits;
 import com.srmaca.model.ecommerce.data.Comparation;
 import com.srmaca.model.ecommerce.data.Ingredients;
 import com.srmaca.model.ecommerce.data.PillsData;
@@ -14,7 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-/* @JsonPropertyOrder(
+@JsonPropertyOrder(
     {
         "idProduct",
         "imagebg",
@@ -28,9 +32,9 @@ import lombok.*;
         "whatis",
         "howworks",
         "howuse",
-        "benefitsList"
+        "benefits"
     }
-) */
+)
 
 @Entity
 @Table(name = "products", schema = "ecommerce")
@@ -73,6 +77,7 @@ public class Product {
     private String howworks;
 
     @Column(name = "howuse", nullable = true)
+    @JsonIgnore
     private String howuse;
 
     @Column(name = "price", nullable = true)
@@ -91,6 +96,9 @@ public class Product {
     @Column(name = "ingredients", columnDefinition = "text", nullable = true)
     private String ingredients;
 
+    @Column(name = "benefits", columnDefinition = "text", nullable = true)
+    private String benefits;
+
     // Get Atributos Como JSON
     @Transient
     public PillsData getPillsData() {
@@ -101,6 +109,7 @@ public class Product {
         try {
             return objectMapper.readValue(pillsData, PillsData.class);
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -114,6 +123,7 @@ public class Product {
         try {
             return objectMapper.readValue(addTextData, AddTextData.class);
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -124,9 +134,10 @@ public class Product {
         if(comparation == null){
             return null;
         }
-        try {
+        try { 
             return objectMapper.readValue(comparation, Comparation.class);
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -140,6 +151,21 @@ public class Product {
         try {
             return objectMapper.readValue(ingredients, Ingredients.class);
         } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Transient
+    public Benefits getBenefits() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        if (benefits == null) {
+            return null;
+        }
+        try {
+            return objectMapper.readValue(benefits, Benefits.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
             return null;
         }
     }

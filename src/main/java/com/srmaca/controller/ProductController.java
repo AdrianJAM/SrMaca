@@ -1,15 +1,9 @@
 package com.srmaca.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 import com.srmaca.model.ecommerce.Product;
-import com.srmaca.model.ecommerce.data.AddTextData;
-import com.srmaca.model.ecommerce.data.PillsData;
-import com.srmaca.model.ecommerce.data.ResourceNotFoundException;
 import com.srmaca.service.ProductService;
 import java.util.List;
 import java.util.Optional;
@@ -20,14 +14,14 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ObjectMapper objectMapper;
+    // @Autowired
+    // private ObjectMapper objectMapper;
     
     public ProductController(ProductService productService){
         this.productService = productService;
     }
 
-    @PostMapping(value = "create", headers = "Accept=application/json")
+    @PostMapping(value = "createProduct", headers = "Accept=application/json")
     public void createProduct(@RequestBody Product product){
         productService.createProduct(product);
     }
@@ -46,8 +40,9 @@ public class ProductController {
     public List<Product> getProductByName(@PathVariable String name){
         return productService.getProductByName(name);
     }
+}
 
-    @PutMapping(value = "updatePillsData/{productId}", consumes = "application/json", produces = "application/json")
+  /*   @PutMapping(value = "updatePillsData/{productId}", consumes = "application/json", produces = "application/json")
     public String updatePillsData(@PathVariable Long productId, @RequestBody PillsData updatedPillsData) {
         // Convertir PillsData a JSON
         String pillsDataJson;
@@ -93,5 +88,4 @@ public class ProductController {
         productService.updateProduct(product);
 
         return "AddTextData updated successfully";
-    }
-}
+    } */
