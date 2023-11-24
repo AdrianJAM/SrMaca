@@ -19,6 +19,10 @@ public class ProductService {
     public void createProduct(Product product){
         productRepository.save(product);
     }
+    //Metodo para guardar producto
+    public Product saveProduct(Product product){
+        return productRepository.save(product);
+    }
     //Metodo para obtener lista de productos
     public List<Product> getProducts(){
         List<Product> products = productRepository.findAll();

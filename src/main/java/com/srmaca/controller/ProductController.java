@@ -1,8 +1,11 @@
 package com.srmaca.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-// import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.srmaca.model.ecommerce.Product;
 import com.srmaca.service.ProductService;
 import java.util.List;
@@ -14,17 +17,47 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private ProductService productService;
-    // @Autowired
-    // private ObjectMapper objectMapper;
+    @Autowired
+    private ObjectMapper objectMapper;
     
     public ProductController(ProductService productService){
         this.productService = productService;
     }
 
-    @PostMapping(value = "createProduct", headers = "Accept=application/json")
-    public void createProduct(@RequestBody Product product){
-        productService.createProduct(product);
+    // @PostMapping(value = "createProduct", consumes = "application/json")
+    // public void createProduct(@RequestBody Product product){
+    //     productService.createProduct(product);
+    // }
+
+    @PostMapping(value = "createProduct", headers  = "Accept=application/json")
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+
+    try {
+
+        // Mapear objetos JSON a string 
+        String pillsDataJson = objectMapper.writeValueAsString(product.getPillsData());
+        product.setPillsData(pillsDataJson);
+        
+        String addTextJson = objectMapper.writeValueAsString(product.getAddTextData()); 
+        product.setAddTextData(addTextJson);
+
+        String comparationJson = objectMapper.writeValueAsString(product.getComparation());
+        product.setComparation(comparationJson);
+        
+        String ingredientsJson = objectMapper.writeValueAsString(product.getIngredients());
+        product.setIngredients(ingredientsJson);
+
+        String benefitsJson = objectMapper.writeValueAsString(product.getBenefits());
+        product.setBenefits(benefitsJson);
+    } catch (JsonProcessingException e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+    
+    Product createdProduct = productService.saveProduct(product);
+    
+    return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+}
 
     @GetMapping(value = "getProducts", headers = "Accept=application/json")
     public List<Product> getProducts(){

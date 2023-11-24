@@ -88,19 +88,19 @@ public class Product {
     private BigDecimal price;
 
     // Atributos JSON
-    @Column(name = "pillsData", columnDefinition = "text", nullable = true)
+    @Column(name = "pillsData", columnDefinition = "jsonb", nullable = true)
     private String pillsData;
 
-    @Column(name = "addTextData", columnDefinition = "text", nullable = true)
+    @Column(name = "addTextData", columnDefinition = "jsonb", nullable = true)
     private String addTextData;
 
-    @Column(name = "comparation", columnDefinition = "text", nullable = true)
+    @Column(name = "comparation", columnDefinition = "jsonb", nullable = true)
     private String comparation;
 
-    @Column(name = "ingredients", columnDefinition = "text", nullable = true)
+    @Column(name = "ingredients", columnDefinition = "jsonb", nullable = true)
     private String ingredients;
 
-    @Column(name = "benefits", columnDefinition = "text", nullable = true)
+    @Column(name = "benefits", columnDefinition = "jsonb", nullable = true)
     private String benefits;
 
     // Get Atributos Como JSON
