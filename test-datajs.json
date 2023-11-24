@@ -45,11 +45,5 @@
       "artificial1": "Efecto secundarios negativos",
       "artificial2": "Peligroso para la salud",
       "arificial3": "Poco seguro y procedencia dudosa"
-    },
-    "benefitsList": [
-        "benefit1",
-        "benefit2",
-        "benefit3",
-        "benefit4"
-    ]
+    }
 }

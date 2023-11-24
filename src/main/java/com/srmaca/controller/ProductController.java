@@ -1,9 +1,15 @@
 package com.srmaca.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.srmaca.model.ecommerce.Product;
+import com.srmaca.model.ecommerce.data.AddTextData;
+import com.srmaca.model.ecommerce.data.PillsData;
+import com.srmaca.model.ecommerce.data.ResourceNotFoundException;
 import com.srmaca.service.ProductService;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +20,8 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ObjectMapper objectMapper;
     
     public ProductController(ProductService productService){
         this.productService = productService;
@@ -39,26 +47,51 @@ public class ProductController {
         return productService.getProductByName(name);
     }
 
-    @PutMapping(value = "update/{id}", headers = "Accept=application/json")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
-        Optional<Product> existingProduct = productService.getProductById(id);
-
-        if (existingProduct.isPresent()) {
-            // Actualizar solo los campos que necesitas
-            Product productToUpdate = existingProduct.get();
-            productToUpdate.setName(updatedProduct.getName());
-            // productToUpdate.setBenefits(updatedProduct.getBenefits());
-            // Actualizar otros campos según sea necesario
-
-            // Actualizar el campo pillsData
-            productToUpdate.setPillsData(updatedProduct.getPillsData());
-
-            // Guardar el producto actualizado en la base de datos
-            Product savedProduct = productService.updateProduct(productToUpdate);
-
-            return ResponseEntity.ok(savedProduct);
-        } else {
-            return ResponseEntity.notFound().build();
+    @PutMapping(value = "updatePillsData/{productId}", consumes = "application/json", produces = "application/json")
+    public String updatePillsData(@PathVariable Long productId, @RequestBody PillsData updatedPillsData) {
+        // Convertir PillsData a JSON
+        String pillsDataJson;
+        try {
+            pillsDataJson = objectMapper.writeValueAsString(updatedPillsData);
+        } catch (JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, 
+                    "Error converting PillsData to JSON");
         }
+
+        // Buscar el producto
+        Product product = productService.getProductById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+        // Actualizar el campo pillsData
+        product.setPillsData(pillsDataJson);
+
+        // Guardar el producto actualizado en la base de datos
+        productService.updateProduct(product);
+
+        return "PillsData updated successfully";
+    }
+
+    @PutMapping(value = "updateAddTextData/{productId}", consumes = "application/json", produces = "application/json")
+    public String updateAddTextData(@PathVariable Long productId, @RequestBody AddTextData updatedAddTextData) {
+        // Convertir PillsData a JSON
+        String addTextDataJson;
+        try {
+            addTextDataJson = objectMapper.writeValueAsString(updatedAddTextData);
+        } catch (JsonProcessingException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, 
+                    "Error converting PillsData to JSON");
+        }
+
+        // Buscar el producto
+        Product product = productService.getProductById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+
+        // Actualizar el campo pillsData
+        product.setAddTextData(addTextDataJson);
+
+        // Guardar el producto actualizado en la base de datos
+        productService.updateProduct(product);
+
+        return "AddTextData updated successfully";
     }
 }

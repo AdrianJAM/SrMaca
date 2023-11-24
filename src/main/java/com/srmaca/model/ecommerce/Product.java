@@ -1,13 +1,14 @@
 package com.srmaca.model.ecommerce;
 
+import java.math.BigDecimal;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.srmaca.model.ecommerce.data.AddTextData;
+import com.srmaca.model.ecommerce.data.Comparation;
+import com.srmaca.model.ecommerce.data.Ingredients;
 import com.srmaca.model.ecommerce.data.PillsData;
 import jakarta.persistence.*;
 import lombok.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-// import java.util.Arrays;
-// import java.util.List;
-//import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-// import com.fasterxml.jackson.core.JsonProcessingException;
 
 @Data
 @NoArgsConstructor
@@ -42,9 +43,6 @@ public class Product {
     @Column(name = "name", nullable = true)
     private String name;
 
-    // @Column(name = "benefits", nullable = true)
-    // private String benefits = "";
-
     // Atributos Data.JS
     
     @Column(name = "imagebg", nullable = true)
@@ -68,9 +66,6 @@ public class Product {
     @Column(name = "description", nullable = true)
     private String description;
 
-    @Column(name = "pillsData", columnDefinition = "text", nullable = true)
-    private String pillsData;
-
     @Column(name = "whatis", nullable = true)
     private String whatis;
 
@@ -80,25 +75,72 @@ public class Product {
     @Column(name = "howuse", nullable = true)
     private String howuse;
 
-/*     @Transient
-    public List<String> getBenefitsList() {
-        return Arrays.asList(benefits.split(","));
-    } */
+    @Column(name = "price", nullable = true)
+    private BigDecimal price;
 
-   /*  public PillsData getPillsData(){
-        try{
-        return PillsData.fromJson(this.pillsData);
-        } catch (JsonProcessingException e){
-            e.printStackTrace();
+    // Atributos JSON
+    @Column(name = "pillsData", columnDefinition = "text", nullable = true)
+    private String pillsData;
+
+    @Column(name = "addTextData", columnDefinition = "text", nullable = true)
+    private String addTextData;
+
+    @Column(name = "comparation", columnDefinition = "text", nullable = true)
+    private String comparation;
+
+    @Column(name = "ingredients", columnDefinition = "text", nullable = true)
+    private String ingredients;
+
+    // Get Atributos Como JSON
+    @Transient
+    public PillsData getPillsData() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        if (pillsData == null) {
+            return null;
+        }
+        try {
+            return objectMapper.readValue(pillsData, PillsData.class);
+        } catch (JsonProcessingException e) {
             return null;
         }
     }
 
-    public void setPillsData(PillsData pillsData){
-        try {
-            this.pillsData = pillsData.toJson();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+    @Transient
+    public AddTextData getAddTextData() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        if (addTextData == null) {
+            return null;
         }
-    } */
+        try {
+            return objectMapper.readValue(addTextData, AddTextData.class);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
+    }
+
+    @Transient
+    public Comparation getComparation(){
+        ObjectMapper objectMapper = new ObjectMapper();
+        if(comparation == null){
+            return null;
+        }
+        try {
+            return objectMapper.readValue(comparation, Comparation.class);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
+    }
+
+    @Transient
+    public Ingredients getIngredients() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        if (ingredients == null) {
+            return null;
+        }
+        try {
+            return objectMapper.readValue(ingredients, Ingredients.class);
+        } catch (JsonProcessingException e) {
+            return null;
+        }
+    }
 }
