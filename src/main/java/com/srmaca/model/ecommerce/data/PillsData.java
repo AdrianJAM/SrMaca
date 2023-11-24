@@ -1,7 +1,7 @@
 package com.srmaca.model.ecommerce.data;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.core.JsonProcessingException;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
 @Data
@@ -15,7 +15,7 @@ public class PillsData {
 
     // Metodos de Serializacion JSON
 
-    public String toJson() throws JsonProcessingException {
+  /*   public String toJson() throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         String json = mapper.writeValueAsString(this);
         return json;
@@ -25,5 +25,5 @@ public class PillsData {
         ObjectMapper mapper = new ObjectMapper(); 
         PillsData pillsData = mapper.readValue(json, PillsData.class);
         return pillsData;
-    }
+    } */
 }

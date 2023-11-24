@@ -33,11 +33,7 @@ public class ProductService {
         return productRepository.findByName(name);
     }
     //Metodo para actualizar datos de producto
-    public void updateProduct(Product product){
-        productRepository.save(product);
-    }
-
-    public Product saveProduct(Product product){
+    public Product updateProduct(Product product){
         return productRepository.save(product);
     }
 }

@@ -1,7 +1,6 @@
 package com.srmaca.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.srmaca.model.ecommerce.Product;
@@ -40,31 +39,26 @@ public class ProductController {
         return productService.getProductByName(name);
     }
 
-    @PutMapping(value = "updateProduct/{id}", headers = "Accept=application/json")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+    @PutMapping(value = "update/{id}", headers = "Accept=application/json")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
+        Optional<Product> existingProduct = productService.getProductById(id);
 
-    Product existingProduct = productService.getProductById(id)
-    .orElseThrow();
+        if (existingProduct.isPresent()) {
+            // Actualizar solo los campos que necesitas
+            Product productToUpdate = existingProduct.get();
+            productToUpdate.setName(updatedProduct.getName());
+            // productToUpdate.setBenefits(updatedProduct.getBenefits());
+            // Actualizar otros campos según sea necesario
 
-        existingProduct.setName(product.getName());
-        existingProduct.setPrice(product.getPrice());
-        existingProduct.setDescription(product.getDescription());
-        existingProduct.setImagebg(product.getImagebg());
-        existingProduct.setTitle(product.getTitle());
-        existingProduct.setTransitionname(product.getTransitionname());
-        existingProduct.setBgstart(product.getBgstart());
-        existingProduct.setTextcolor(product.getTextcolor());
-        existingProduct.setDetailstitle(product.getDetailstitle());
-        existingProduct.setWhatis(product.getWhatis());
-        existingProduct.setHowworks(product.getHowworks());
-        existingProduct.setHowuse(product.getHowuse());
-        existingProduct.setBenefits(product.getBenefits());
-        existingProduct.setPillsData(product.getPillsData());
-        existingProduct.setAddTextData(product.getAddTextData());
-        existingProduct.setIngredients(product.getIngredients());
-        existingProduct.setComparation(product.getComparation());
+            // Actualizar el campo pillsData
+            productToUpdate.setPillsData(updatedProduct.getPillsData());
 
-        Product updatedProduct = productService.saveProduct(existingProduct);
-        return new ResponseEntity<>(updatedProduct, HttpStatus.OK); 
+            // Guardar el producto actualizado en la base de datos
+            Product savedProduct = productService.updateProduct(productToUpdate);
+
+            return ResponseEntity.ok(savedProduct);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
