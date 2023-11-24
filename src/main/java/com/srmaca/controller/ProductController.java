@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.srmaca.model.ecommerce.Product;
 import com.srmaca.service.ProductService;
 import java.util.List;
@@ -42,36 +40,31 @@ public class ProductController {
         return productService.getProductByName(name);
     }
 
-
     @PutMapping(value = "updateProduct/{id}", headers = "Accept=application/json")
-    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct){
-        try {
-            Product existingProduct = productService.getProductById(id).orElseThrow();
-            if(existingProduct == null){
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-            existingProduct.setName(updatedProduct.getName());
-            existingProduct.setBenefits(updatedProduct.getBenefits());
-            existingProduct.setImagebg(updatedProduct.getImagebg());
-            existingProduct.setTitle(updatedProduct.getTitle());
-            existingProduct.setTransitionname(updatedProduct.getTransitionname());
-            existingProduct.setBgstart(updatedProduct.getBgstart());
-            existingProduct.setTextcolor(updatedProduct.getTextcolor());
-            existingProduct.setDetailstitle(updatedProduct.getDetailstitle());
-            existingProduct.setDescription(updatedProduct.getDescription());
-            existingProduct.setPillsData(updatedProduct.getPillsData());
-            existingProduct.setAddTextData(updatedProduct.getAddTextData());
-            existingProduct.setWhatis(updatedProduct.getWhatis());
-            existingProduct.setHowworks(updatedProduct.getHowworks());
-            existingProduct.setIngredients(updatedProduct.getIngredients());
-            existingProduct.setComparation(updatedProduct.getComparation());
-            existingProduct.setHowuse(updatedProduct.getHowuse());
-            Product savedProduct = productService.saveProduct(existingProduct);
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
 
-            return ResponseEntity.ok(savedProduct);
+    Product existingProduct = productService.getProductById(id)
+    .orElseThrow();
 
-        } catch (JsonProcessingException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        existingProduct.setName(product.getName());
+        existingProduct.setPrice(product.getPrice());
+        existingProduct.setDescription(product.getDescription());
+        existingProduct.setImagebg(product.getImagebg());
+        existingProduct.setTitle(product.getTitle());
+        existingProduct.setTransitionname(product.getTransitionname());
+        existingProduct.setBgstart(product.getBgstart());
+        existingProduct.setTextcolor(product.getTextcolor());
+        existingProduct.setDetailstitle(product.getDetailstitle());
+        existingProduct.setWhatis(product.getWhatis());
+        existingProduct.setHowworks(product.getHowworks());
+        existingProduct.setHowuse(product.getHowuse());
+        existingProduct.setBenefits(product.getBenefits());
+        existingProduct.setPillsData(product.getPillsData());
+        existingProduct.setAddTextData(product.getAddTextData());
+        existingProduct.setIngredients(product.getIngredients());
+        existingProduct.setComparation(product.getComparation());
+
+        Product updatedProduct = productService.saveProduct(existingProduct);
+        return new ResponseEntity<>(updatedProduct, HttpStatus.OK); 
     }
 }
