@@ -29,8 +29,11 @@ import lombok.*;
         "detailstitle",
         "description",
         "pillsData",
+        "addTextData",
         "whatis",
         "howworks",
+        "ingredients",
+        "comparation",
         "howuse",
         "benefits"
     }
@@ -45,6 +48,7 @@ public class Product {
     private Long  idProduct;
 
     @Column(name = "name", nullable = true)
+    @JsonIgnore
     private String name;
 
     // Atributos Data.JS
@@ -77,10 +81,10 @@ public class Product {
     private String howworks;
 
     @Column(name = "howuse", nullable = true)
-    @JsonIgnore
     private String howuse;
 
     @Column(name = "price", nullable = true)
+    @JsonIgnore
     private BigDecimal price;
 
     // Atributos JSON
