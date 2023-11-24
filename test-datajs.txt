@@ -1,0 +1,55 @@
+{
+    "name": "prueba4",
+    "price": "2",
+    "imagebg": null,
+    "title": null,
+    "transitionname": null,
+    "bgstart": null,
+    "textcolor": null,
+    "detailstitle": null,
+    "description": "Producto de prueba",
+    "whatis": null,
+    "howworks": null,
+    "howuse": null,
+    "pillsData": {
+      "principal": "/images/tarro.png",
+      "pils1": "/images/pildora1.png",
+      "pils2": "/images/pildora2.png",
+      "transitionname": "testo",
+      "transitionpils1": "testopils1",
+      "transitionpils2": "testopils2"
+    },
+    "addTextData": {
+      "fontsize": "text-sm",
+      "title":
+        "Suplemento Natural y diseñado para estimular al propio cuerpo que genere más testosterona",
+      "buttonbg1": "#C0DDC8",
+      "buttonbg2": "#2B9D6D",
+      "buttontc1": "black",
+      "buttontc2": "white",
+      "buttongo1": "products/testo-plus",
+      "buttongo2": "/",
+      "buttontitle1": "conoce más",
+      "buttontitle2": "Compra ya"
+    },
+    "ingredients": {
+      "ingredient1": "Huanarpo Machi",
+      "ingredient2": "Barojo",
+      "ingredient3": "Maca Nagra",
+      "ingredient4": "Marapuama"
+    },
+     "comparation": {
+      "natural1": "sin contradicciones",
+      "natural2": "saludable y beneficioso para la salud",
+      "natural3": "Practico y seguro",
+      "artificial1": "Efecto secundarios negativos",
+      "artificial2": "Peligroso para la salud",
+      "arificial3": "Poco seguro y procedencia dudosa"
+    },
+    "benefitsList": [
+        "benefit1",
+        "benefit2",
+        "benefit3",
+        "benefit4"
+    ]
+}

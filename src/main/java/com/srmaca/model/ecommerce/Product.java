@@ -57,7 +57,7 @@ public class Product {
 
     @Column(name = "benefits")
     @JsonIgnore
-    private String benefits;
+    private String benefits = "";
 
     @Column(name = "category_id")
     @JsonIgnore
