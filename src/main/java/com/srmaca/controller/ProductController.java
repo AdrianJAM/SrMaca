@@ -2,10 +2,9 @@ package com.srmaca.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 import com.srmaca.model.ecommerce.Product;
 import com.srmaca.service.ProductService;
 import java.util.List;
@@ -17,8 +16,8 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ObjectMapper objectMapper;
+    // @Autowired
+    // private ObjectMapper objectMapper;
     
     public ProductController(ProductService productService){
         this.productService = productService;
@@ -30,28 +29,9 @@ public class ProductController {
     // }
 
     @PostMapping(value = "createProduct", consumes = "application/json")
-    public void createProduct(@RequestBody Product product) {
-        String ingredientsJson;
-        String benefitsJson;
-        String pillsDataJson;
-        String comparationJson;
-        String addTextDataJson;
-        try {
-            ingredientsJson = objectMapper.writeValueAsString(product.getIngredients());
-            benefitsJson = objectMapper.writeValueAsString(product.getBenefits());
-            pillsDataJson = objectMapper.writeValueAsString(product.getPillsData());
-            comparationJson = objectMapper.writeValueAsString(product.getComparation());
-            addTextDataJson = objectMapper.writeValueAsString(product.getAddTextData());
-        } catch (JsonProcessingException e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, 
-                    "Error converting PillsData to JSON");
-        }
-        product.setIngredients(ingredientsJson);
-        product.setBenefits(benefitsJson);
-        product.setAddTextData(addTextDataJson);
-        product.setPillsData(pillsDataJson);
-        product.setComparation(comparationJson);
-        productService.saveProduct(product);
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        Product createdProduct = productService.saveProduct(product);
+        return new ResponseEntity<>(createdProduct, HttpStatus.CREATED);
     }
 
     @GetMapping(value = "getProducts", headers = "Accept=application/json")
@@ -70,7 +50,7 @@ public class ProductController {
     }
 }
 
-    /*   @PutMapping(value = "updatePillsData/{productId}", consumes = "application/json", produces = "application/json")
+  /*   @PutMapping(value = "updatePillsData/{productId}", consumes = "application/json", produces = "application/json")
     public String updatePillsData(@PathVariable Long productId, @RequestBody PillsData updatedPillsData) {
         // Convertir PillsData a JSON
         String pillsDataJson;

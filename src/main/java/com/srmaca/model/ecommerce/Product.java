@@ -1,7 +1,6 @@
 package com.srmaca.model.ecommerce;
 
 import java.math.BigDecimal;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -171,6 +170,34 @@ public class Product {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    // Set Atributos Como JSON
+    public void setPillsData(PillsData pillsData){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            this.pillsData = objectMapper.writeValueAsString(pillsData);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setAddTextData(AddTextData addTextData){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            this.addTextData = objectMapper.writeValueAsString(addTextData);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setIngredients(Ingredients ingredients){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            this.ingredients = objectMapper.writeValueAsString(ingredients);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
         }
     }
 }
