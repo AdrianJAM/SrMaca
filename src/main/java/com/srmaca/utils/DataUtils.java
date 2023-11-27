@@ -8,7 +8,7 @@ public class DataUtils {
     private DataUtils() {
     }
 
-    public static ResponseEntity<String> getResponseEntity(String message, int status) {
-        return new ResponseEntity<String>("Mensaje : " + message,HttpStatus.valueOf(status));
+    public static ResponseEntity<String> getResponseEntity(String message, HttpStatus httpstatus) {
+        return new ResponseEntity<String>("Mensaje : " + message, httpstatus);
     }
 }
