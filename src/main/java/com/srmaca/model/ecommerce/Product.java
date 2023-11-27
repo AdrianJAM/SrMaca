@@ -1,17 +1,15 @@
 package com.srmaca.model.ecommerce;
 
-import java.math.BigDecimal;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.srmaca.model.ecommerce.data.AddTextData;
-import com.srmaca.model.ecommerce.data.Benefits;
-import com.srmaca.model.ecommerce.data.Comparation;
-import com.srmaca.model.ecommerce.data.Ingredients;
-import com.srmaca.model.ecommerce.data.PillsData;
 import jakarta.persistence.*;
 import lombok.*;
+import com.srmaca.model.ecommerce.data.PillsData;
+import com.srmaca.model.ecommerce.data.AddTextData;
+import com.srmaca.model.ecommerce.data.Comparation;
+import com.srmaca.model.ecommerce.data.Ingredients;
+import com.srmaca.model.ecommerce.data.Benefits;
 
 @Data
 @NoArgsConstructor
@@ -47,7 +45,6 @@ public class Product {
     private Long  idProduct;
 
     @Column(name = "name", nullable = true)
-    @JsonIgnore
     private String name;
 
     // Atributos Data.JS
@@ -81,25 +78,22 @@ public class Product {
 
     @Column(name = "howuse", nullable = true)
     private String howuse;
-
-    @Column(name = "price", nullable = true)
-    @JsonIgnore
-    private BigDecimal price;
-
+    
     // Atributos JSON
-    @Column(name = "pillsData", columnDefinition = "jsonb", nullable = true)
+
+    @Column(name = "pillsData", columnDefinition = "text", nullable = true)
     private String pillsData;
 
-    @Column(name = "addTextData", columnDefinition = "jsonb", nullable = true)
+    @Column(name = "addTextData", columnDefinition = "text", nullable = true)
     private String addTextData;
 
-    @Column(name = "comparation", columnDefinition = "jsonb", nullable = true)
+    @Column(name = "comparation", columnDefinition = "text", nullable = true)
     private String comparation;
 
-    @Column(name = "ingredients", columnDefinition = "jsonb", nullable = true)
+    @Column(name = "ingredients", columnDefinition = "text", nullable = true)
     private String ingredients;
 
-    @Column(name = "benefits", columnDefinition = "jsonb", nullable = true)
+    @Column(name = "benefits", columnDefinition = "text", nullable = true)
     private String benefits;
 
     // Get Atributos Como JSON
@@ -170,34 +164,6 @@ public class Product {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    // Set Atributos Como JSON
-    public void setPillsData(PillsData pillsData){
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            this.pillsData = objectMapper.writeValueAsString(pillsData);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setAddTextData(AddTextData addTextData){
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            this.addTextData = objectMapper.writeValueAsString(addTextData);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setIngredients(Ingredients ingredients){
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            this.ingredients = objectMapper.writeValueAsString(ingredients);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
         }
     }
 }

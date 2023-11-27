@@ -16,11 +16,7 @@ public class ProductService {
         this.productRepository = productRepository;
     }
     //Metodo para crear producto
-    public void createProduct(Product product){
-        productRepository.save(product);
-    }
-    //Metodo para guardar producto
-    public Product saveProduct(Product product){
+    public Product  createProduct(Product product){
         return productRepository.save(product);
     }
     //Metodo para obtener lista de productos
