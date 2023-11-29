@@ -1,4 +1,4 @@
-package com.srmaca.jwt;
+package com.srmaca.security.jwt;
 
 import java.util.Date;
 import java.util.HashMap;

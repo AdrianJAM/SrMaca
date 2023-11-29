@@ -1,4 +1,4 @@
-package com.srmaca.jwt;
+package com.srmaca.security;
 
 import java.util.ArrayList;
 import java.util.Objects;

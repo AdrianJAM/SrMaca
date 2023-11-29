@@ -5,10 +5,13 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import com.srmaca.model.ecommerce.data.ConstantData;
 import com.srmaca.model.users.Users;
 import com.srmaca.repository.UsersRepository;
+import com.srmaca.security.CustomDetailsService;
+import com.srmaca.security.jwt.JwtUtil;
 import com.srmaca.service.UsersService;
 import com.srmaca.utils.DataUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +21,15 @@ import lombok.extern.slf4j.Slf4j;
 public class UsersServiceImpl implements UsersService{
     @Autowired
     private UsersRepository usersRepository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private CustomDetailsService customDetailsService;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @Override
     public ResponseEntity<String> signUp(Map<String, String> requestMap) {
@@ -59,5 +71,10 @@ public class UsersServiceImpl implements UsersService{
         user.setStatus(requestMap.get("status"));
         user.setRole(requestMap.get("role"));
         return user;
+    }
+
+    @Override
+    public ResponseEntity<String> login(Map<String, String> requestMap){
+        return null;
     }
 }

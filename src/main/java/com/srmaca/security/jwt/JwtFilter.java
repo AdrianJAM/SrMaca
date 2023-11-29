@@ -1,19 +1,15 @@
-package com.srmaca.jwt;
-
-import java.security.Security;
+package com.srmaca.security.jwt;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
+import com.srmaca.security.CustomDetailsService;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.io.IOException;
+import java.io.IOException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +28,7 @@ public class JwtFilter extends OncePerRequestFilter{
     private String username = null;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)throws ServletException, IOException{
         if(request.getServletPath().matches("user/login|user/forgotPassword|/user/signUp")){
             filterChain.doFilter(request, response);
         }else{
