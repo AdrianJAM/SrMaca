@@ -30,4 +30,14 @@ public class UsersController {
         }
         return DataUtils.getResponseEntity(ConstantData.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @PostMapping(value = "login", headers = "Accept=application/json")
+    public ResponseEntity<String> login(@RequestBody(required = true) Map<String, String> requestMap){
+        try {
+            return usersService.login(requestMap);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return DataUtils.getResponseEntity(ConstantData.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import com.srmaca.model.ecommerce.data.ConstantData;
 import com.srmaca.model.users.Users;
@@ -75,6 +77,26 @@ public class UsersServiceImpl implements UsersService{
 
     @Override
     public ResponseEntity<String> login(Map<String, String> requestMap){
-        return null;
+        log.info("Logging in user: {}", requestMap.get("username"));
+        try {
+            Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(requestMap.get("email"), requestMap.get("password")));
+            if (authentication.isAuthenticated()) {
+                if(customDetailsService.getUserDetail().getStatus().equalsIgnoreCase("true")){
+                    return new ResponseEntity<String>(
+                        "{\"token\":\"" + 
+                        jwtUtil.generateToken(
+                            customDetailsService.getUserDetail().getEmail(), 
+                            customDetailsService.getUserDetail().getRole()) + "\"}", 
+                            HttpStatus.OK);
+                } else {
+                            return new ResponseEntity<String>("{\"message\":\"WAIT APROVE ADMIN\"}", HttpStatus.BAD_REQUEST);
+
+                }
+            }
+        } catch (Exception e) {
+            log.error("Error logging in user: {}", e.getMessage());
+        }
+        return new ResponseEntity<String>("{\"message\":\"INVALID CREDENTIALS\"}", HttpStatus.BAD_REQUEST);
     }
 }
