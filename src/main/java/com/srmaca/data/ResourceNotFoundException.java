@@ -1,4 +1,4 @@
-package com.srmaca.model.ecommerce.data;
+package com.srmaca.data;
 
 public class ResourceNotFoundException extends RuntimeException {
 

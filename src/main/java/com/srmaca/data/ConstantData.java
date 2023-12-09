@@ -1,4 +1,4 @@
-package com.srmaca.model.ecommerce.data;
+package com.srmaca.data;
 
 public class ConstantData {
     public static final String  SOMETHING_WENT_WRONG = "Something went wrong";

@@ -3,13 +3,14 @@ package com.srmaca.model.ecommerce;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.srmaca.data.AddTextData;
+import com.srmaca.data.Benefits;
+import com.srmaca.data.Comparation;
+import com.srmaca.data.Ingredients;
+import com.srmaca.data.PillsData;
+
 import jakarta.persistence.*;
 import lombok.*;
-import com.srmaca.model.ecommerce.data.PillsData;
-import com.srmaca.model.ecommerce.data.AddTextData;
-import com.srmaca.model.ecommerce.data.Comparation;
-import com.srmaca.model.ecommerce.data.Ingredients;
-import com.srmaca.model.ecommerce.data.Benefits;
 
 @Data
 @NoArgsConstructor
