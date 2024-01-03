@@ -1,45 +1,39 @@
 package com.srmaca.security;
 
+import org.springframework.stereotype.Component;
 import io.jsonwebtoken.*;
+import java.util.Date;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-import javax.crypto.spec.SecretKeySpec;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
 
 @Component
 public class JwtTokenUtil {
 
-    private final String jwtSecret = "srmaca";
-    private final int jwtExpirationMs = 3600000;
+    private String jwtSecret = "srmaca";
+    private int jwtExpirationMs = 86400000;
 
     public String generateJwtToken(Authentication authentication) {
-
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
-
-        SecretKeySpec key = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), "HmacSHA512");
-
+        Date now = new Date();
+        Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
         return Jwts.builder()
                 .claim("sub", userPrincipal.getUsername())
-                .issuedAt(new Date())
-                .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
-                .signWith(key)
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
-
-    public String getUserNameFromJwtToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(jwtSecret.getBytes(StandardCharsets.UTF_8)).build().parseClaimsJws(token).getBody().getSubject();
-    }
-
-    public boolean validateJwtToken(String authToken) {
+    
+    public boolean validateJwtToken(String token) {
         try {
-            Jwts.parserBuilder().setSigningKey(jwtSecret.getBytes(StandardCharsets.UTF_8)).build().parseClaimsJws(authToken);
+            Jwts.parserBuilder().setSigningKey(jwtSecret).build().parseClaimsJws(token);
             return true;
         } catch (JwtException e) {
-            // Invalid JWT token
+            // Aquí manejas la excepción
+            // Esto ocurre si hay algún problema con el token.
         }
-
+    
         return false;
     }
+    
 }
